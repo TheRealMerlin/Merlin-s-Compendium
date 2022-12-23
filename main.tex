@@ -9,13 +9,14 @@
 \usepackage{enumitem}
 \usepackage{graphicx,float}
 \usepackage{tabularx,makecell,array}
-
 \usepackage[depth=3]{bookmark}
 
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
 
 \numberwithin{figure}{section}
 \numberwithin{equation}{section}
+
+\renewcommand*{\thefootnote}{[\arabic{footnote}]}
 
 \newcommand{\sq}{\subseteq}
 \newcommand{\paren}[1]{\left(#1\right)}
@@ -57,7 +58,15 @@
 			\bhat{z} \cross \bhat{x} &= \bhat{y}
 		\end{cases}
 	\end{equation}
-	Using the relationship, $ \bm{A} \cross \bm{B} = \bm{C} \Leftrightarrow \bm{B} \cross \bm{A} = -\bm{C} $, you can derive the rest of the relationships from Eq. \ref{eq:cart_cross}. It is sometimes easier to write vectors and their relationships using Kronecher-Delta and Levi-Civita \footnote{See Appendix. \ref{sec:lckd}.}.
+	Using the relationship, $ \bm{A} \cross \bm{B} = \bm{C} \Leftrightarrow \bm{B} \cross \bm{A} = -\bm{C} $, you can derive the rest of the relationships from Eq. \ref{eq:cart_cross}. It is sometimes easier to write vectors and their relationships using Kronecher-Delta and Levi-Civita \footnote{See Appendix. \ref{sec:lckd}.}. Here are a list useful vector relationships:
+	\begin{align}
+		\bm{r} &= x\bhat{i} + y\bhat{j} + z\bhat{k}\\
+		\dd{\bm{\ell}} &= \dd{x}\bhat{i} + \dd{y}\bhat{j} + \dd{z}\bhat{k}\\
+		\dd{\tau} &= \dd{x}\dd{y}\dd{z}\\
+		\grad{f} &= \pdv{f}{x}\bhat{i} + \pdv{f}{y}\bhat{j} + \pdv{f}{z}\bhat{k}\\
+		\div{\bm{v}} &= \pdv{v_x}{x} + \pdv{v_y}{y} + \pdv{v_z}{z}\\
+		\curl{\bm{v}} &= \paren{\pdv{v_z}{y} - \pdv{v_y}{z}}\bhat{i} + \paren{\pdv{v_x}{z} - \pdv{v_z}{x}}\bhat{j} + \paren{\pdv{v_y}{x} - \pdv{v_x}{y}}\bhat{k}
+	\end{align}
 
 	\section{Cylindrical Coordinates}
 	Cylindrical coordinates are given by $ (\rho,\phi,z) $. This tends to be useful when you have a cylindrical object or some kind of cylindrical symmetry you want to describe. $ \rho $ corresponds to the radial length in the $ x-y $ plane, $ \phi $ is the angle with respect to the $ x $ axis, and $ z $ is of course the $ z $ coordinate from our Cartesian coordinates. For these coordinates, we will use the following unit vectors: $ \bhat{\rho} $, $ \bhat{\phi} $, and $ \bhat{z} $. These unit vectors are illustrated in the following figure:
@@ -84,6 +93,14 @@
 			z &= z
 		\end{cases}
 	\end{equation}
+	Conversions between the Cartesian unit vectors to cylindrical unit vectors are given by:
+	\begin{equation}
+		\begin{cases}
+			\bhat{i} &= \cos\phi\bhat{\rho} - \sin\phi\bhat{\phi}\\
+			\bhat{j} &= \sin\phi\bhat{\rho} + \cos\phi\bhat{\phi}\\
+			\bhat{k} &= \bhat{z}
+		\end{cases}
+	\end{equation}
 	Their cross product relationships are:
 	\begin{equation}
 		\begin{cases}
@@ -92,6 +109,15 @@
 			\bhat{z} \cross \bhat{\rho} &= \bhat{\phi}
 		\end{cases}
 	\end{equation}
+	Some useful vector relationships are:
+	\begin{align}
+		\bm{r} &= \rho\bhat{\rho} + z\bhat{z}\\
+		\dd{\bm{\ell}} &= \dd{\rho}\bhat{\rho} + \rho\dd{\phi}\bhat{\phi} + \dd{z}\bhat{z}\\
+		\dd{\tau} &= \rho\dd{\rho}\dd{\phi}\dd{z}\\
+		\grad{f} &= \pdv{f}{\rho}\bhat{\rho} + \dfrac{1}{\rho}\pdv{f}{\phi}\bhat{\phi} + \pdv{f}{z}\bhat{z}\\
+		\div{\bm{v}} &= \dfrac{1}{\rho}\pdv{\rho}\paren{\rho v_\rho} + \dfrac{1}{\rho}\pdv{v_\phi}{\phi} + \pdv{v_z}{z}\\
+		\curl{\bm{v}} &= \left[\dfrac{1}{\rho}\pdv{v_z}{\phi} - \pdv{v_\phi}{z}\right]\bhat{\rho} + \left[\pdv{v_\rho}{z} - \pdv{v_z}{\rho}\right]\bhat{\phi} + \dfrac{1}{\rho}\left[\pdv{\rho}\paren{\rho v_\phi} - \pdv{v_\rho}{\phi}\right]\bhat{z}
+	\end{align}
 
 	\section{Spherical Coordinates}
 	Similarly, spherical coordinates are useful to describing spherical objects or for things that have some sort of spherical symmetry (i.e., a force that depends only on the distance between the objects).
@@ -119,6 +145,14 @@
 			z &= r\cos\theta
 		\end{cases}
 	\end{equation}
+	Conversions between the Cartesian unit vectors to the spherical unit vectors are given by:
+	\begin{equation}
+		\begin{cases}
+			\bhat{i} &= \sin\theta\cos\phi\bhat{r} + \cos\theta\cos\phi\bhat{\theta} - \sin\phi\bhat{\phi}\\
+			\bhat{j} &= \sin\theta\sin\phi\bhat{r} + \cos\theta\sin\phi\bhat{\theta} + \cos\phi\bhat{\phi}\\
+			\bhat{k} &= \cos\theta\bhat{r} - \sin\theta\bhat{\theta}
+		\end{cases}
+	\end{equation}
 	Their cross product relationships are:
 	\begin{equation}
 		\begin{cases}
@@ -127,6 +161,15 @@
 			\bhat{\phi} \cross \bhat{r} &= \bhat{\theta}
 		\end{cases}
 	\end{equation}
+	Some useful vector relationships are:
+	\begin{align}
+		\bm{r} &= r\bhat{r}\\
+		\dd{\bm{\ell}} &= \dd{r}\bhat{r} + r\dd{\theta}\bhat{\theta} + r\sin\theta\dd{\phi}\bhat{\phi}\\
+		\dd{\tau} &= r^2\sin\theta\dd{r}\dd{\theta}\dd{\phi}\\
+		\grad{f} &= \pdv{f}{r}\bhat{r} + \dfrac{1}{r}\pdv{f}{\theta}\bhat{\theta} + \dfrac{1}{r\sin\theta}\pdv{f}{\phi}\bhat{\phi}\\
+		\div{\bm{v}} &= \dfrac{1}{r^2}\pdv{r}\paren{r^2v_r} + \dfrac{1}{r\sin\theta}\pdv{\theta}\paren{\sin\theta v_\theta} + \dfrac{1}{r\sin\theta}\pdv{v_\phi}{\phi}\\
+		\curl{\bm{v}} &= \dfrac{1}{r\sin\theta}\left[\pdv{\theta}\paren{\sin\theta v_\phi} - \pdv{v_\theta}{\phi}\right]\bhat{r} + \dfrac{1}{r}\left[\dfrac{1}{\sin\theta}\pdv{v_r}{\phi} - \pdv{r}\paren{rv_\phi}\right]\bhat{\theta} + \dfrac{1}{r}\left[\pdv{r}\paren{rv_\theta} - \pdv{v_r}{\theta}\right]\bhat{\phi}
+	\end{align}
 
 	\chapter{Newtonian Mechanics}
 	\section{Newton's Laws}
@@ -198,7 +241,7 @@
 	\begin{equation}
 		F = G\dfrac{m_1m_2}{r^2}
 	\end{equation}
-	where $ G = 6.67430(15) \times 10^{-11} $ m\textsuperscript{3} kg\textsuperscript{-1} s\textsuperscript{-2} is the gravitational constant\footnote{https://physics.nist.gov/cgi-bin/cuu/Value?bg} and $ r $ is the distance between the two masses. The direction of the force points the mass that is pulling it. Thus, we see that the two objects are pulling each other with the same force, but in opposite directions.\\
+	where $ G = 6.67430(15) \times 10^{-11} $ m\textsuperscript{3} kg\textsuperscript{-1} s\textsuperscript{-2} is the gravitational constant\footnote{\url{https://physics.nist.gov/cgi-bin/cuu/Value?bg}} and $ r $ is the distance between the two masses. The direction of the force points the mass that is pulling it. Thus, we see that the two objects are pulling each other with the same force, but in opposite directions.\\
 	
 	This formula is nice when you only have to deal with two masses. For more systems involving more than two masses, we use a nice trick involving center of mass. Suppose there are $ N $ point-like particles with mass and we wish to find the force of gravity on particle 1. We first need to calculate the center of mass of the other $ N - 1 $ particles.
 	\begin{equation}
@@ -207,17 +250,27 @@
 
 	Letting $ M = \sum_{n = 2}^{N}m_n $, we get that the force of gravity acting on particle 1 is
 	\begin{equation}
-		F = G\dfrac{Mm_1}{\abs{\bm{r}_\text{cm} - \bm{r}_1}^2}
+		\bm{F} = G\dfrac{Mm_1}{\abs{\bm{r}_\text{cm} - \bm{r}_1}^3}\paren{\bm{r}_{cm} - \bm{r}_1}
 	\end{equation}
 
 	As we can see this calculation becomes very tedious very quickly, especially if we want to see how the system evolves with time.
 	
 	\section{Kepler's Laws}
+	Kepler's laws are as follows:
+	\begin{enumerate}
+		\item (Law of Orbits). All planets move in elliptical orbits, with the sun at one focus.
+		
+		\item (Law of Area). A line that connects a planet to the sun sweeps out equal areas in equal times.
+		
+		\item (Law of Periods). The square of the period of any planet is proportional to the cube of the semimajor axis of its orbit.
+	\end{enumerate}
+
 	\section{Bernoulli's Equation}
 	\section{Friction}
 
 	\chapter{Lagrangian/Hamiltonian Mechanics}
 	\section{Principle of Least Action}
+	\section{Tensor of Inertia}
 	\section{Lagrangian Formulation}
 	\section{Hamiltonian Formulation}
 
@@ -311,6 +364,13 @@
 	as expected and similarly for Levi-Civita.
 
 	\section{Covariant and Contravariant Vectors}
+	Contravariant vectors are written as $ \bm{A} = A^{i}\bhat{e}_i $, whereas the covariant vectors are written as $ \bm{A} = A_i\bhat{e}^i $. Note that the covariant and contravariant vectors both describe the same vector, $ \bm{A} $, but with respect to two different bases. It follows that
+	\begin{align}
+		\bm{A} \cdot \bm{A} &= A_i\bhat{e}^i \cdot A^j\bhat{e}_j\\
+		&= A_iA^j\delta_i^j\\
+		&= A_iA^i
+	\end{align}
+	It should be noted that $ \bhat{e}_i \cdot \bhat{e}^j = \delta_i^j $.
 
 	\chapter{Trigonometric Functions}
 	\section{Trig Identities}
