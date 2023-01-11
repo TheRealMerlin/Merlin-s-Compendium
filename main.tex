@@ -292,8 +292,97 @@
 	\section{Canonical Formalism}
 
 	\chapter{Quantum Mechanics}
-	\section{Schrödinger Wave Mechanics}
-	\section{Heisenberg Matrix Mechanics}
+	\section{Schrödinger Equation}
+	In classical mechanics, we describe a particle using its position function $ \bm{r}(t) $. From this function, we know its position and velocity at any given time $ t $. However, in quantum mechanics, we cannot know both with arbitrary precision. Thus, we use a probability amplitude function $ \Psi $ such that the probability of finding the particle at some position $ \bm{r} $ at some time $ t $ is $ P(\bm{r},t) = \abs{\Psi(\bm{r},t)}^2 $. (It is worth noting that $ \Psi $ can be imaginary). Given that $ \abs{\Psi(\bm{r},t)}^2 $ is a probability density and thus subject to the normalization condition
+	\begin{equation}
+		\int\abs{\Psi}^2\dd[3]{\bm{r}} = 1
+	\end{equation}
+	
+	Note that I will tend to use $ \Psi(\bm{r},t) $ denoting wavefunction depending on both space and time, $ \psi(\bm{r}) $ denoting the wavefunction depending only on space, and $ \varphi(t) $ denoting a wavefunction that depends only on time. The choice of this is arbitrary, however, we will see that we can sometimes describe the ``total wavefunction'' $ \Psi(\bm{r},t) $ as
+	\begin{equation}
+		\Psi(\bm{r},t) = \psi(\bm{r})\varphi(t)
+	\end{equation}
+	
+	In classical mechanics, we also use $ \bm{F} = m\bm{a} $ to describe how a system evolves with time. The analogous equation in quantum mechanics is the Schrödinger equation. The time-dependent Schrödinger equations is
+	\begin{equation}
+		\paren{-\dfrac{\hbar^2}{2m}\laplacian + V}\Psi(\bm{r},t) = i\hbar\pdv{t}\Psi(\bm{r},t)
+	\end{equation}
+	where $ V $ is the potential energy and $ \Psi $ is the wavefunction of our system. If the total energy of the wavefunction remains constant with time, we use the time-independent Schrödinger equation:
+	\begin{equation}
+		\paren{-\dfrac{\hbar^2}{2m}\laplacian + V}\Psi(\bm{r},t) = E\Psi(\bm{r},t)
+	\end{equation}
+	where $ E $ is the total energy of the system. In this case, we call $ E $ the eigenvalue of the eigenfunction $ \Psi $. This will become more apparent when we introduce the usage of the ``Hilbert Space'' later on.
+	
+	\section{Position Space and Momentum Space}
+
+	\section{Operators}
+	Operators are extremely useful in quantum mechanics. They act as ``information extractors'' on the wavefunction itself. The information that is extracted is something that has physical meaning and thus can be observed. We call these observables. Given the probabilistic nature of the wavefunction, we get an expectation value of the observable denoted by the brackets, $ \expval{Q} $. For a general example, we want to know the expectation value of some observable $ Q $, we use its respective operator, $ \hat{Q} $, on the wavefunction as such:
+	\begin{equation}
+		\expval{Q} = \int\psi^*(\bm{r})\hat{Q}\psi(\bm{r})\dd[3]{\bm{r}}
+	\end{equation}
+
+	More concrete examples are:
+	\begin{equation}
+		\expval{\bm{r}} = \int\bm{r}\abs{\psi(\bm{r})}^2\dd[3]{\bm{r}}
+	\end{equation}
+	\begin{equation}
+		\expval{\bm{p}} = -i\hbar\int\psi^*(\bm{r})\grad{\psi(\bm{r})}\dd[3]{\bm{r}}
+	\end{equation}
+	where $ \hat{\bm{r}} = \bm{r} $ is the position operator and $ \hat{\bm{p}} = -i\hbar\grad $ is the momentum operator. Note that in this case, our wavefunction is dependent on space and not momentum. The choice of coordinate space for our wavefunction can change the explicit definition of our operators. For example, given our wavefunction in $ p $-space, $ \phi(\bm{p}) $. We have
+	\begin{equation}
+		\expval{\bm{r}} = i\hbar\int\phi^*(\bm{p})\grad{}_{\bm{p}}\phi(\bm{p})\dd[3]{\bm{p}}
+	\end{equation}
+	where $ \grad{}_{\bm{p}} = \dpdv{p_x} + \dpdv{p_y} + \dpdv{p_z} $.
+	\begin{equation}
+		\expval{\bm{p}} = \int\bm{p}\abs{\phi(\bm{p})}^2\dd[3]{\bm{p}}
+	\end{equation}
+	Thus, the operators are explicitly defined as $ \hat{\bm{r}} = i\hbar\grad{}_{\bm{p}} $ and $ \hat{\bm{p}} = \bm{p} $ in momentum space.
+	
+	Here is a table of the position and momentum operators and their explicit definitions in their respective coordinate spaces:
+	\begin{table}[H]
+		\centering
+		\bgroup
+		\renewcommand\cellgape{\Gape[5pt]}
+		\setlength\extrarowheight{2pt}
+		\begin{tabularx}{\textwidth}{YYYY}
+			\hline\hline
+			Operator & Position Space & $ k $-space & $ p $-space\\
+			\hline
+			$ \hat{\bm{r}} $ & $ \bm{r} $ & $ i\grad{}_{\bm{k}} $ & $ i\hbar\grad{}_{\bm{p}} $\\
+			$ \hat{\bm{p}} $ & $ -i\hbar\grad $ & $ \hbar\bm{k} $ & $ \bm{p} $\\
+			\hline\hline
+		\end{tabularx}
+		\egroup
+		\caption{Position and momentum operator table.}
+	\end{table}
+	Using these definitions, we can now define the following operators:
+	\begin{table}[H]
+		\centering
+		\bgroup
+		\renewcommand\cellgape{\Gape[5pt]}
+		\setlength\extrarowheight{2pt}
+		\begin{tabularx}{\textwidth}{YY}
+			\hline\hline
+			Name & Operator\\
+			\hline\hline
+			Kinetic Energy & \makecell[c]{$ \hat{T} = \dfrac{\hat{\bm{p}}^2}{2m} $}\\
+			Potential Energy & \makecell[c]{$ \hat{V} = V $}\\
+			Total Energy & \makecell[c]{$ \hat{E} = i\hbar\dpdv{t} $}\\
+			Hamiltonian & \makecell[c]{$ \hat{H} = \hat{T} + \hat{V} $}\\
+			\hline\hline
+		\end{tabularx}
+		\egroup
+		\caption{Energy operator table.}
+	\end{table}
+	We can now re-write the Schrödinger equation in terms of these operators and we get
+	\begin{equation}
+		\hat{H}\Psi = \hat{E}\Psi
+	\end{equation}
+
+	We can now also more clearly see that $ \hat{E}\Psi = E\Psi $ is analogous to the linear algebra definition of an eigenvalue $ E $ of some eigenfunction $ \Psi $ for the time-independent case.
+	
+	\section{Heisenberg Uncertainty Principle}
+	\section{Hilbert Space}
 	\section{Perturbation Theory}
 
 	\chapter{Nuclear Physics}
